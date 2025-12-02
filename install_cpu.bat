@@ -6,7 +6,7 @@ echo インストールスクリプト (CPU専用版)
 echo ========================================
 echo.
 
-echo [1/2] Python確認...
+echo [1/3] Python確認...
 python --version
 if %errorlevel% neq 0 (
     echo エラー: Pythonがインストールされていません
@@ -15,11 +15,20 @@ if %errorlevel% neq 0 (
 )
 echo.
 
-echo [2/2] 依存関係のインストール (CPU専用版)...
+echo [2/3] llama-cpp-python (CPU専用版) のインストール...
 echo これは数分かかる場合があります...
+pip install llama-cpp-python --upgrade
+if %errorlevel% neq 0 (
+    echo エラー: llama-cpp-pythonのインストールに失敗しました
+    pause
+    exit /b 1
+)
+echo.
+
+echo [3/3] その他の依存関係のインストール...
 pip install -r requirements.txt
 if %errorlevel% neq 0 (
-    echo エラー: インストールに失敗しました
+    echo エラー: 依存関係のインストールに失敗しました
     pause
     exit /b 1
 )

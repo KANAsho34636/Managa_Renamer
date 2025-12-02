@@ -17,17 +17,25 @@ if %errorlevel% neq 0 (
 echo.
 
 echo [2/3] llama-cpp-python (GPU版) のインストール...
-echo CUDA対応版をビルドします（数分かかる場合があります）
+echo CUDA対応版をビルドします（10-20分かかる場合があります）
+echo.
 set CMAKE_ARGS=-DGGML_CUDA=on
 pip install llama-cpp-python --force-reinstall --upgrade --no-cache-dir
 if %errorlevel% neq 0 (
     echo.
     echo 警告: GPU版のインストールに失敗しました
+    echo.
     echo CPU専用版をインストールしますか？ (Y/N)
     set /p choice=
     if /i "%choice%"=="Y" (
+        echo.
         echo CPU専用版をインストールします...
-        pip install llama-cpp-python
+        pip install llama-cpp-python --upgrade
+        if %errorlevel% neq 0 (
+            echo エラー: CPU版のインストールも失敗しました
+            pause
+            exit /b 1
+        )
     ) else (
         echo インストールを中止しました
         pause
