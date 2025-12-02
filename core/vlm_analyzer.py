@@ -1,8 +1,6 @@
 """
 Vision Language Modelを使用した画像分析エンジン
 """
-from llama_cpp import Llama
-from llama_cpp.llama_chat_format import Llava15ChatHandler
 from PIL import Image
 import base64
 from io import BytesIO
@@ -13,6 +11,15 @@ from config import Config
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+# llama_cppは遅延インポート（インストールされていなくてもモジュールは読み込める）
+try:
+    from llama_cpp import Llama
+    from llama_cpp.llama_chat_format import Llava15ChatHandler
+    LLAMA_CPP_AVAILABLE = True
+except ImportError:
+    LLAMA_CPP_AVAILABLE = False
+    logger.warning("llama-cpp-python is not installed. VLM analysis will not be available.")
 
 
 class VLMAnalyzer:
@@ -38,6 +45,15 @@ class VLMAnalyzer:
 
         # 比較結果のキャッシュ
         self.comparison_cache = {}
+
+        # llama-cpp-pythonの有無確認
+        if not LLAMA_CPP_AVAILABLE:
+            raise ImportError(
+                "llama-cpp-python is not installed. "
+                "Please install it first:\n"
+                "  GPU version: install.bat or install_gpu_latest.bat\n"
+                "  CPU version: install_cpu.bat"
+            )
 
         logger.info(f"Initializing VLMAnalyzer...")
         logger.info(f"Model: {model_path}")

@@ -203,6 +203,17 @@ class MangaRenamerGUI:
 
                 self.status_label.config(text="モデルロード完了")
                 logger.info("VLM model loaded successfully")
+        except ImportError as e:
+            logger.error(f"llama-cpp-python not installed: {e}")
+            messagebox.showerror(
+                "依存関係エラー",
+                "llama-cpp-python がインストールされていません。\n\n"
+                "以下のいずれかを実行してください:\n"
+                "  GPU版: install.bat または install_gpu_latest.bat\n"
+                "  CPU版: install_cpu.bat\n\n"
+                "詳細: README.md を参照してください"
+            )
+            self.status_label.config(text="llama-cpp-python 未インストール")
         except Exception as e:
             logger.error(f"Failed to load model: {e}")
             messagebox.showerror("エラー", f"モデルロード失敗: {e}")
