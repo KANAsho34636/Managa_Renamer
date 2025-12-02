@@ -32,7 +32,7 @@ cd D:\
 Windows (PowerShell):
 ```powershell
 cd D:\manga_renamer
-$env:CMAKE_ARGS="-DLLAMA_CUBLAS=on"
+$env:CMAKE_ARGS="-DGGML_CUDA=on"
 pip install llama-cpp-python --force-reinstall --upgrade --no-cache-dir
 pip install -r requirements.txt
 ```
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 Linux/Mac:
 ```bash
 cd /path/to/manga_renamer
-CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python
+CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python
 pip install -r requirements.txt
 ```
 
