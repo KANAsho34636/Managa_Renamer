@@ -15,10 +15,10 @@ class ModelDownloader:
     # モデル設定
     MODELS = {
         'qwen3-vl-4b-q4': {
-            'repo_id': 'unsloth/Qwen3-VL-4B-Instruct-GGUF',
-            'model_file': 'Qwen3-VL-4B-Instruct-Q4_K_M.gguf',
-            'mmproj_file': 'Qwen3-VL-4B-Instruct-mmproj-f16.gguf',
-            'size_gb': 2.8  # 概算サイズ
+            'repo_id': 'Qwen/Qwen3-VL-4B-Instruct-GGUF',
+            'model_file': 'Qwen3VL-4B-Instruct-Q4_K_M.gguf',
+            'mmproj_file': 'mmproj-Qwen3VL-4B-Instruct-F16.gguf',
+            'size_gb': 3.3  # 2.5GB + 0.8GB mmproj
         },
         'qwen2.5-vl-7b-q4': {
             'repo_id': 'unsloth/Qwen2.5-VL-7B-Instruct-GGUF',
